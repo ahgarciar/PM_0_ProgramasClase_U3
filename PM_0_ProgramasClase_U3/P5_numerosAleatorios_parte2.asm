@@ -45,6 +45,14 @@ INCLUDE Irvine32.inc
 
 		loop ciclo
 
+		;Tarea (Programa). Adaptar a randomrange para que de numeros en A y B. Donde B siempre será más grande que A. 
+		;				   Consideración: A y B siempre serán positivos 
+		;
+		;		Ejemplo A = 5 , B = 10
+		;			Esto permitirá generar números aleatorios entre 5 y 10 (sin llegar o llegando al 10, depende de su programación)
+		;
+		;		Enlace de Guia: http://programacionnerd.blogspot.com/2012/05/c-generando-numeros-aleatorios-random.html
+		;
 		
 		exit	
 	
