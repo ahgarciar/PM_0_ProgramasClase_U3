@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/26/21 08:38:14
+Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/27/21 08:58:15
 NombreProgram						     Page 1 - 1
 
 
@@ -57,90 +57,92 @@ Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/26/21 08:38:14
 			      C 		pop edx   ;recupero el valor original de edx
 			      C ENDM
 			      C 
+			      C Suma_V1 MACRO  ; los valores que usará el macro son almacenados en registros en el programa principal
+			      C 			   ; y estos son consultados / accedidos desde el MACRO
+			      C 
+			      C 	; sumar a los registros ebx, ecx
+			      C 
+			      C 	.data
+			      C 
+			      C 	.code
+			      C 		
+			      C 		add ebx, ecx  ; el valor resultado estará en ebx
+			      C 
+			      C ENDM
+			      C 
+			      C 
+			      C Suma_V2 MACRO a, b  		
+			      C 	
+			      C 	; sumar a los registros ebx, ecx que contendrán al valor de a y b respectivamente
+			      C 	.data
+			      C 
+			      C 	.code
+			      C 		
+			      C 		push ecx ; respaldar el valor de ecx 
+			      C 
+			      C 		mov ebx, a
+			      C 		mov ecx, b
+			      C 
+			      C 		add ebx, ecx  ; el valor resultado estará en ebx
+			      C 
+			      C 
+			      C 		pop ecx ;recupero el valor original de ecx para que el usuario lo pueda seguir utilizando sin problema
+			      C ENDM
+			      C 
+			      C 
+			      C Suma_V3 MACRO a, b  				
+			      C 	.data
+			      C 		varA dword a
+			      C 		varB dword b
+			      C 
+			      C 	.code
+			      C 				
+			      C 		mov ebx, varA		
+			      C 
+			      C 		add ebx, varB  ; el valor resultado estará en ebx
+			      C 	
+			      C ENDM
+			      C 
 
  00000000			.data
 				; Área de Declaración de Variables
+ 00000000 00000006		var1_p12 dword 6
 
  00000000			.code
 
- 00000000				main9 PROC
+ 00000000				main12 PROC
 					
 						;Lógica del Programa
 
- 00000000  BA 0000000A				mov edx, 10
+						;Suma_V3  10, 7  ; el resultado de la suma se almacenará en ebx
 
- 00000005  8B C2				mov eax, edx
- 00000007  E8 00000000 E			call writedec
+ 00000000  B8 0000000A				mov eax, 10
+ 00000005  BA 00000005				mov edx, 5
+						
+						;Suma_V3  eax, edx  ; el resultado de la suma se almacenará en ebx
 
-						ImpPantallaLn "Mensaje de Saludo 1"		
- 00000000		     1		.data
- 00000000 4D 65 6E 73 61     1			??0000 db "Mensaje de Saludo 1",0
-	   6A 65 20 64 65
-	   20 53 61 6C 75
-	   64 6F 20 31 00
- 0000000C		     1		.code
- 0000000C  52		     1			push edx  ; guardo en la pila el valor
- 0000000D  BA 00000000 R     1			mov edx, offset ??0000
- 00000012  E8 00000000 E     1			call writestring
- 00000017  E8 00000000 E     1			call crlf
- 0000001C  5A		     1			pop edx   ;recupero el valor original de edx
-						ImpPantallaLn "Mensaje de Saludo 2"
- 00000014		     1		.data
- 00000014 4D 65 6E 73 61     1			??0001 db "Mensaje de Saludo 2",0
-	   6A 65 20 64 65
-	   20 53 61 6C 75
-	   64 6F 20 32 00
- 0000001D		     1		.code
- 0000001D  52		     1			push edx  ; guardo en la pila el valor
- 0000001E  BA 00000014 R     1			mov edx, offset ??0001
- 00000023  E8 00000000 E     1			call writestring
- 00000028  E8 00000000 E     1			call crlf
- 0000002D  5A		     1			pop edx   ;recupero el valor original de edx
-						ImpPantallaLn "Mensaje de Saludo 3"
- 00000028		     1		.data
- 00000028 4D 65 6E 73 61     1			??0002 db "Mensaje de Saludo 3",0
-	   6A 65 20 64 65
-	   20 53 61 6C 75
-	   64 6F 20 33 00
- 0000002E		     1		.code
- 0000002E  52		     1			push edx  ; guardo en la pila el valor
- 0000002F  BA 00000028 R     1			mov edx, offset ??0002
- 00000034  E8 00000000 E     1			call writestring
- 00000039  E8 00000000 E     1			call crlf
- 0000003E  5A		     1			pop edx   ;recupero el valor original de edx
-						ImpPantallaLn "Mensaje de Saludo 4"		
- 0000003C		     1		.data
- 0000003C 4D 65 6E 73 61     1			??0003 db "Mensaje de Saludo 4",0
-	   6A 65 20 64 65
-	   20 53 61 6C 75
-	   64 6F 20 34 00
- 0000003F		     1		.code
- 0000003F  52		     1			push edx  ; guardo en la pila el valor
- 00000040  BA 0000003C R     1			mov edx, offset ??0003
- 00000045  E8 00000000 E     1			call writestring
- 0000004A  E8 00000000 E     1			call crlf
- 0000004F  5A		     1			pop edx   ;recupero el valor original de edx
-						ImpPantallaLn "Mensaje de Saludo 5"		
- 00000050		     1		.data
- 00000050 4D 65 6E 73 61     1			??0004 db "Mensaje de Saludo 5",0
-	   6A 65 20 64 65
-	   20 53 61 6C 75
-	   64 6F 20 35 00
- 00000050		     1		.code
- 00000050  52		     1			push edx  ; guardo en la pila el valor
- 00000051  BA 00000050 R     1			mov edx, offset ??0004
- 00000056  E8 00000000 E     1			call writestring
- 0000005B  E8 00000000 E     1			call crlf
- 00000060  5A		     1			pop edx   ;recupero el valor original de edx
+						;Suma_V3  eax, var1_p12  ; el resultado de la suma se almacenará en ebx
 
- 00000061  8B C2				mov eax, edx
- 00000063  E8 00000000 E			call writedec
+						;Suma_V3  eax, 2  ; el resultado de la suma se almacenará en ebx
+
+						Suma_V3  dword ptr[var1_p12], dword ptr[var1_p12]  ; el resultado de la suma se almacenará en ebx
+ 00000004		     1		.data
+ 00000004 00000000 R	     1			varA dword dword ptr[var1_p12]
+ 00000008 00000000 R	     1			varB dword dword ptr[var1_p12]
+ 0000000A		     1		.code
+ 0000000A  8B 1D 00000004 R  1			mov ebx, varA		
+ 00000010  03 1D 00000008 R  1			add ebx, varB  ; el valor resultado estará en ebx
+
+ 00000016  8B C3				mov eax, ebx
+ 00000018  E8 00000000 E			call writedec
+
+
 						exit	
 					
- 0000006F				main9 ENDP
+ 00000024				main12 ENDP
 					
-					END main9
-Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/26/21 08:38:14
+					END main12
+Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/27/21 08:58:15
 NombreProgram						     Symbols 2 - 1
 
 
@@ -152,6 +154,9 @@ Macros:
 
 ImpPantallaLn  . . . . . . . . .	Proc
 ImpPantalla  . . . . . . . . . .	Proc
+Suma_V1  . . . . . . . . . . . .	Proc
+Suma_V2  . . . . . . . . . . . .	Proc
+Suma_V3  . . . . . . . . . . . .	Proc
 
 
 Structures and Unions:
@@ -242,8 +247,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000064 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000006F Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000000C Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000024 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -350,7 +355,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main9  . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000006F Public STDCALL
+main12 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000024 Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -360,11 +365,6 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000000 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 00000014 _DATA	
-??0002 . . . . . . . . . . . . .	Byte	 00000028 _DATA	
-??0003 . . . . . . . . . . . . .	Byte	 0000003C _DATA	
-??0004 . . . . . . . . . . . . .	Byte	 00000050 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -589,6 +589,9 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
+var1_p12 . . . . . . . . . . . .	DWord	 00000000 _DATA	
+varA . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
+varB . . . . . . . . . . . . . .	DWord	 00000008 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
