@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/27/21 08:58:15
+Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/28/21 08:41:36
 NombreProgram						     Page 1 - 1
 
 
@@ -106,43 +106,38 @@ Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/27/21 08:58:15
 
  00000000			.data
 				; Área de Declaración de Variables
- 00000000 00000006		var1_p12 dword 6
 
  00000000			.code
 
- 00000000				main12 PROC
+ 00000000				main14 PROC
 					
 						;Lógica del Programa
 
-						;Suma_V3  10, 7  ; el resultado de la suma se almacenará en ebx
-
- 00000000  B8 0000000A				mov eax, 10
- 00000005  BA 00000005				mov edx, 5
+						ImpPantallaLn "Ingresa un caracter: "
+ 00000000		     1		.data
+ 00000000 49 6E 67 72 65     1			??0000 db "Ingresa un caracter: ",0
+	   73 61 20 75 6E
+	   20 63 61 72 61
+	   63 74 65 72 3A
+	   20 00
+ 00000000		     1		.code
+ 00000000  52		     1			push edx  ; guardo en la pila el valor
+ 00000001  BA 00000000 R     1			mov edx, offset ??0000
+ 00000006  E8 00000000 E     1			call writestring
+ 0000000B  E8 00000000 E     1			call crlf
+ 00000010  5A		     1			pop edx   ;recupero el valor original de edx
 						
-						;Suma_V3  eax, edx  ; el resultado de la suma se almacenará en ebx
+ 00000011  E8 00000000 E			call readchar ; el caracter se almacena en "al"
 
-						;Suma_V3  eax, var1_p12  ; el resultado de la suma se almacenará en ebx
-
-						;Suma_V3  eax, 2  ; el resultado de la suma se almacenará en ebx
-
-						Suma_V3  dword ptr[var1_p12], dword ptr[var1_p12]  ; el resultado de la suma se almacenará en ebx
- 00000004		     1		.data
- 00000004 00000000 R	     1			varA dword dword ptr[var1_p12]
- 00000008 00000000 R	     1			varB dword dword ptr[var1_p12]
- 0000000A		     1		.code
- 0000000A  8B 1D 00000004 R  1			mov ebx, varA		
- 00000010  03 1D 00000008 R  1			add ebx, varB  ; el valor resultado estará en ebx
-
- 00000016  8B C3				mov eax, ebx
- 00000018  E8 00000000 E			call writedec
+ 00000016  E8 00000000 E			call writechar  ; imprime en pantalla el valor que se encuentra en "al"
 
 
 						exit	
 					
- 00000024				main12 ENDP
+ 00000022				main14 ENDP
 					
-					END main12
-Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/27/21 08:58:15
+					END main14
+Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/28/21 08:41:36
 NombreProgram						     Symbols 2 - 1
 
 
@@ -247,8 +242,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000000C Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000024 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000016 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000022 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -355,7 +350,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main12 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000024 Public STDCALL
+main14 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000022 Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -365,6 +360,7 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
+??0000 . . . . . . . . . . . . .	Byte	 00000000 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -589,9 +585,6 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-var1_p12 . . . . . . . . . . . .	DWord	 00000000 _DATA	
-varA . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
-varB . . . . . . . . . . . . . .	DWord	 00000008 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
