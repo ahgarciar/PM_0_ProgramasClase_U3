@@ -28,9 +28,13 @@ INCLUDE MACROS.inc
 
 		call writechar  ; imprime en pantalla el valor que se encuentra en "al"
 
-
+		
 		exit	
 	
 	main14 ENDP
 	
 	END main14
+
+
+		;LOS PROGRAMAS DE LA UNIDAD 3, SERÁN LOS PROGRAMAS DE LA UNIDAD 2 SIENDO ESTOS ULTIMOS ADAPTADOS 
+		; PARA TRABAJAR CON MACROS Y ADICIONAR SI ES POSIBLE EL USO DE PROCEDIMIENTOS

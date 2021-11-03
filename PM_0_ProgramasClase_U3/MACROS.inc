@@ -43,7 +43,7 @@ Suma_V2 MACRO a, b
 
 	.code
 		
-		push ecx ; respaldar el valor de ecx 
+		push ecx ; respaldar el valor de ecx 		
 
 		mov ebx, a
 		mov ecx, b

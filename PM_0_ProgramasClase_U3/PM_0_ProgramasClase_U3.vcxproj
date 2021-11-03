@@ -27,6 +27,7 @@
     <MASM Include="P12_SumaMacro_V3.asm" />
     <MASM Include="P13_LimpiaPantalla.asm" />
     <MASM Include="P14_LeerEscribirCaracter.asm" />
+    <MASM Include="P15_SumaConsecutiva.asm" />
     <MASM Include="P1_mensajeEmergente.asm" />
     <MASM Include="P2_respMsjEmergente.asm" />
     <MASM Include="P3_mensajeEspera.asm" />
@@ -121,7 +122,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EntryPointSymbol>main14</EntryPointSymbol>
+      <EntryPointSymbol>main15</EntryPointSymbol>
       <ImportLibrary>c:\Irvine</ImportLibrary>
     </Link>
     <MASM>

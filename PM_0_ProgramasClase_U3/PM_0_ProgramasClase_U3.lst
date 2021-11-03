@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/28/21 08:41:36
+Microsoft (R) Macro Assembler Version 14.16.27027.1	    11/03/21 08:33:23
 NombreProgram						     Page 1 - 1
 
 
@@ -78,7 +78,7 @@ Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/28/21 08:41:36
 			      C 
 			      C 	.code
 			      C 		
-			      C 		push ecx ; respaldar el valor de ecx 
+			      C 		push ecx ; respaldar el valor de ecx 		
 			      C 
 			      C 		mov ebx, a
 			      C 		mov ecx, b
@@ -109,35 +109,94 @@ Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/28/21 08:41:36
 
  00000000			.code
 
- 00000000				main14 PROC
+ 00000000				main15 PROC
 					
 						;Lógica del Programa
 
-						ImpPantallaLn "Ingresa un caracter: "
+						ImpPantallaLn "Ingresa un sumando: "
  00000000		     1		.data
- 00000000 49 6E 67 72 65     1			??0000 db "Ingresa un caracter: ",0
+ 00000000 49 6E 67 72 65     1			??0000 db "Ingresa un sumando: ",0
 	   73 61 20 75 6E
-	   20 63 61 72 61
-	   63 74 65 72 3A
-	   20 00
+	   20 73 75 6D 61
+	   6E 64 6F 3A 20
+	   00
  00000000		     1		.code
  00000000  52		     1			push edx  ; guardo en la pila el valor
  00000001  BA 00000000 R     1			mov edx, offset ??0000
  00000006  E8 00000000 E     1			call writestring
  0000000B  E8 00000000 E     1			call crlf
  00000010  5A		     1			pop edx   ;recupero el valor original de edx
-						
- 00000011  E8 00000000 E			call readchar ; el caracter se almacena en "al"
+ 00000011  E8 00000000 E			call readint ; eax
 
- 00000016  E8 00000000 E			call writechar  ; imprime en pantalla el valor que se encuentra en "al"
+ 00000016  8B D0				mov edx, eax  ; respaldar el valor de eax
+
+						ImpPantallaLn "Ingresa un sumando: "  ;segundo sumando
+ 00000015		     1		.data
+ 00000015 49 6E 67 72 65     1			??0001 db "Ingresa un sumando: ",0
+	   73 61 20 75 6E
+	   20 73 75 6D 61
+	   6E 64 6F 3A 20
+	   00
+ 00000018		     1		.code
+ 00000018  52		     1			push edx  ; guardo en la pila el valor
+ 00000019  BA 00000015 R     1			mov edx, offset ??0001
+ 0000001E  E8 00000000 E     1			call writestring
+ 00000023  E8 00000000 E     1			call crlf
+ 00000028  5A		     1			pop edx   ;recupero el valor original de edx
+ 00000029  E8 00000000 E			call readint ; eax
+
+						
+						Suma_V2 eax, edx  ; resultado estará en ebx
+ 0000002A		     1		.data
+ 0000002E		     1		.code
+ 0000002E  51		     1			push ecx ; respaldar el valor de ecx 		
+ 0000002F  8B D8	     1			mov ebx, eax
+ 00000031  8B CA	     1			mov ecx, edx
+ 00000033  03 D9	     1			add ebx, ecx  ; el valor resultado estará en ebx
+ 00000035  59		     1			pop ecx ;recupero el valor original de ecx para que el usuario lo pueda seguir utilizando sin problema
+ 00000036  8B D3				mov edx, ebx
+
+						ImpPantallaLn "Ingresa un sumando: "  ; tercer sumando
+ 0000002A		     1		.data
+ 0000002A 49 6E 67 72 65     1			??0002 db "Ingresa un sumando: ",0
+	   73 61 20 75 6E
+	   20 73 75 6D 61
+	   6E 64 6F 3A 20
+	   00
+ 00000038		     1		.code
+ 00000038  52		     1			push edx  ; guardo en la pila el valor
+ 00000039  BA 0000002A R     1			mov edx, offset ??0002
+ 0000003E  E8 00000000 E     1			call writestring
+ 00000043  E8 00000000 E     1			call crlf
+ 00000048  5A		     1			pop edx   ;recupero el valor original de edx
+ 00000049  E8 00000000 E			call readint ; eax
+						
+						Suma_V2 eax, edx  ; resultado estará en ebx
+ 0000003F		     1		.data
+ 0000004E		     1		.code
+ 0000004E  51		     1			push ecx ; respaldar el valor de ecx 		
+ 0000004F  8B D8	     1			mov ebx, eax
+ 00000051  8B CA	     1			mov ecx, edx
+ 00000053  03 D9	     1			add ebx, ecx  ; el valor resultado estará en ebx
+ 00000055  59		     1			pop ecx ;recupero el valor original de ecx para que el usuario lo pueda seguir utilizando sin problema
+
+ 00000056  8B C3				mov eax, ebx
+ 00000058  E8 00000000 E			call writedec
 
 
 						exit	
 					
- 00000022				main14 ENDP
+ 00000064				main15 ENDP
 					
-					END main14
-Microsoft (R) Macro Assembler Version 14.16.27027.1	    10/28/21 08:41:36
+					END main15
+
+
+
+
+
+						;LOS PROGRAMAS DE LA UNIDAD 3, SERÁN LOS PROGRAMAS DE LA UNIDAD 2 SIENDO ESTOS ULTIMOS ADAPTADOS 
+						; PARA TRABAJAR CON MACROS Y ADICIONAR SI ES POSIBLE EL USO DE PROCEDIMIENTOS
+Microsoft (R) Macro Assembler Version 14.16.27027.1	    11/03/21 08:33:23
 NombreProgram						     Symbols 2 - 1
 
 
@@ -242,8 +301,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000016 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000022 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000003F Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000064 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -350,7 +409,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main14 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000022 Public STDCALL
+main15 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000064 Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -361,6 +420,8 @@ Symbols:
                 N a m e                 Type     Value    Attr
 
 ??0000 . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 00000015 _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 0000002A _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
